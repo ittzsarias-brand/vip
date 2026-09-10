@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ناوی ماڵپەڕ</title>
+
+    <!--
+        FONT
+        ------------------------------------------
+        Put your font file inside:
+        /font/
+
+        Then change the filename below to your
+        actual font filename.
+    -->
+    <style>
+        @font-face {
+            font-family: "SiteFont";
+            src: url("./font/your-font.woff2") format("woff2");
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        :root {
+            --navy: #071a33;
+            --navy-light: #0d294d;
+            --black: #080a0d;
+            --white: #ffffff;
+            --gray-50: #f7f8fa;
+            --gray-100: #eef1f4;
+            --gray-300: #d7dce2;
+            --gray-500: #7a828d;
+            --gray-700: #343b45;
+
+            --container: 1240px;
+            --radius: 18px;
+            --transition: 180ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "SiteFont", Tahoma, Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.8;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container {
+            width: min(100% - 40px, var(--container));
+            margin-inline: auto;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.94);
+            border-bottom: 1px solid var(--gray-100);
+            backdrop-filter: blur(14px);
+        }
+
+        .header-inner {
+            min-height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+
+        .logo-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .navigation a {
+            position: relative;
+            color: var(--gray-700);
+            font-size: 15px;
+            font-weight: 600;
+            transition: color var(--transition);
+        }
+
+        .navigation a:hover,
+        .navigation a.active {
+            color: var(--navy);
+        }
+
+        .navigation a::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            bottom: -8px;
+            width: 0;
+            height: 2px;
+            background: var(--navy);
+            transition: width var(--transition);
+        }
+
+        .navigation a:hover::after,
+        .navigation a.active::after {
+            width: 100%;
+        }
+
+        .header-action {
+            padding: 10px 19px;
+            border-radius: 10px;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 700;
+            transition:
+                background var(--transition),
+                transform var(--transition);
+        }
+
+        .header-action:hover {
+            background: var(--navy-light);
+            transform: translateY(-1px);
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            background: var(--navy);
+            color: var(--white);
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.035);
+            top: -250px;
+            left: -130px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.025);
+            bottom: -230px;
+            right: -100px;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+            min-height: 580px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 70px;
+            padding-block: 70px;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 22px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero-label span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--white);
+        }
+
+        .hero h1 {
+            margin-bottom: 20px;
+            font-size: clamp(38px, 5vw, 66px);
+            line-height: 1.25;
+            letter-spacing: -1px;
+            font-weight: 850;
+        }
+
+        .hero-description {
+            max-width: 540px;
+            margin-bottom: 34px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 17px;
+            line-height: 2;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding-inline: 23px;
+            border-radius: 10px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-weight: 700;
+            transition:
+                transform var(--transition),
+                background var(--transition),
+                border-color var(--transition);
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: var(--white);
+            color: var(--navy);
+        }
+
+        .button-primary:hover {
+            background: var(--gray-100);
+        }
+
+        .button-outline {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: var(--white);
+        }
+
+        .button-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-card {
+            position: relative;
+            width: min(100%, 470px);
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            border-radius: 28px;
+            background: rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 15px;
+        }
+
+        /* ========================================
+           SECTION
+        ======================================== */
+
+        .section {
+            padding-block: 90px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 38px;
+        }
+
+        .section-title-group {
+            max-width: 650px;
+        }
+
+        .section-eyebrow {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--navy);
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            margin-bottom: 8px;
+            color: var(--black);
+            font-size: clamp(27px, 3vw, 40px);
+            line-height: 1.4;
+            font-weight: 850;
+        }
+
+        .section-description {
+            color: var(--gray-500);
+            font-size: 15px;
+        }
+
+        /* ========================================
+           PRODUCTS
+        ======================================== */
+
+        .products-section {
+            background: var(--gray-50);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .product-card {
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius);
+            transition:
+                transform var(--transition),
+                box-shadow var(--transition),
+                border-color var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gray-300);
+            box-shadow: 0 18px 45px rgba(7, 26, 51, 0.09);
+        }
+
+        .product-image {
+            position: relative;
+            aspect-ratio: 1 / 0.82;
+            overflow: hidden;
+            background: var(--gray-100);
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 350ms ease;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.035);
+        }
+
+        .product-image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        .product-content {
+            padding: 22px;
+        }
+
+        .product-name {
+            margin-bottom: 7px;
+            color: var(--black);
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .product-description {
+            min-height: 54px;
+            margin-bottom: 18px;
+            color: var(--gray-500);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding-top: 16px;
+            border-top: 1px solid var(--gray-100);
+        }
+
+        .product-price {
+            color: var(--navy);
+            font-size: 18px;
+            font-weight: 850;
+            white-space: nowrap;
+        }
+
+        .product-button {
+            padding: 8px 13px;
+            border: 0;
+            border-radius: 8px;
+            background: var(--navy);
+            color: var(--white);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            transition: background var(--transition);
+        }
+
+        .product-button:hover {
+            background: var(--navy-light);
+        }
+
+        /* ========================================
+           INFO SECTION
+        ======================================== */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .info-card {
+            padding: 28px;
+            border: 1px solid var(--gray-100);
+            border-radius: var(--radius);
+            background: var(--white);
+        }
+
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            margin-bottom: 18px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: var(--navy);
+            color: var(--white);
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .info-card h3 {
+            margin-bottom: 7px;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .info-card p {
+            color: var(--gray-500);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        .footer {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .footer-inner {
+            padding-block: 55px 28px;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 50px;
+            padding-bottom: 45px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand {
+            max-width: 390px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .footer-description {
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 14px;
+            font-size: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.52);
+            font-size: 14px;
+            transition: color var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            padding-top: 22px;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 12px;
+            text-align: center;
+        }
+
+        /* ========================================
+           MOBILE NAVIGATION
+        ======================================== */
+
+        .mobile-menu-button {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid var(--gray-300);
+            border-radius: 9px;
+            background: var(--white);
+            color: var(--navy);
+            cursor: pointer;
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+
+        @media (max-width: 1000px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .hero-content {
+                max-width: 720px;
+                text-align: center;
+                margin-inline: auto;
+            }
+
+            .hero-description {
+                margin-inline: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .hero-card {
+                width: min(100%, 390px);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .container {
+                width: min(100% - 28px, var(--container));
+            }
+
+            .header-inner {
+                min-height: 68px;
+            }
+
+            .navigation,
+            .header-action {
+                display: none;
+            }
+
+            .mobile-menu-button {
+                display: grid;
+                place-items: center;
+                font-size: 20px;
+            }
+
+            .navigation.mobile-open {
+                position: absolute;
+                top: 68px;
+                right: 14px;
+                left: 14px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding: 10px;
+                border: 1px solid var(--gray-100);
+                border-radius: 14px;
+                background: var(--white);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            }
+
+            .navigation.mobile-open a {
+                padding: 12px;
+            }
+
+            .navigation.mobile-open a::after {
+                display: none;
+            }
+
+            .hero-inner {
+                min-height: auto;
+                padding-block: 55px 65px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .section {
+                padding-block: 65px;
+            }
+
+            .section-header {
+                display: block;
+                margin-bottom: 28px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .footer-brand {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .logo {
+                font-size: 18px;
+            }
+
+            .logo-mark {
+                width: 34px;
+                height: 34px;
+            }
+
+            .hero h1 {
+                font-size: 33px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .product-content {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ========================================
+         HEADER
+    ======================================== -->
+
+    <header class="header">
+        <div class="container header-inner">
+
+            <a href="#" class="logo" aria-label="ماڵەوە">
+                <span class="logo-mark">N</span>
+                <span>ناوی براند</span>
+            </a>
+
+            <nav class="navigation" id="navigation">
+                <a href="#home" class="active">سەرەتا</a>
+                <a href="#products">بەرهەمەکان</a>
+                <a href="#about">دەربارە</a>
+                <a href="#contact">پەیوەندی</a>
+            </nav>
+
+            <a href="#products" class="header-action">
+                بەرهەمەکان ببینە
+            </a>
+
+            <button
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                aria-label="کردنەوەی مینیو"
+                aria-expanded="false"
+            >
+                ☰
+            </button>
+
+        </div>
+    </header>
+
+
+    <main>
+
+        <!-- ========================================
+             HERO
+        ======================================== -->
+
+        <section class="hero" id="home">
+            <div class="container hero-inner">
+
+                <div class="hero-content">
+
+                    <div class="hero-label">
+                        <span></span>
+                        بەخێربێیت بۆ ماڵپەڕەکەمان
+                    </div>
+
+                    <h1>
+                        شێوازێکی سادە،
+                        بەرهەمێکی تایبەت
+                    </h1>
+
+                    <p class="hero-description">
+                        بەرهەمەکانمان بە شێوازێکی پاک و مۆدێرن
+                        پیشان دەدەین، بۆ ئەوەی بە ئاسانی ئەوەی
+                        بەدوایدا دەگەڕێیت بدۆزیتەوە.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#products" class="button button-primary">
+                            بەرهەمەکان ببینە
+                        </a>
+
+                        <a href="#about" class="button button-outline">
+                            زیاتر بزانە
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual">
+
+                    <div class="hero-card">
+
+                        <!--
+                            Replace this with your real hero image:
+
+                            <img
+                                src="./images/hero.jpg"
+                                alt="وێنەی بەرهەم"
+                            >
+                        -->
+
+                        <div class="hero-placeholder">
+                            وێنەی سەرەکی لێرە دادەنرێت
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ========================================
+             PRODUCTS
+        ======================================== -->
+
+        <section class="section products-section" id="products">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div class="section-title-group">
+
+                        <span class="section-eyebrow">
+                            بەرهەمەکان
+                        </span>
+
+                        <h2 class="section-title">
+                            بەرهەمە هەڵبژێردراوەکانمان
+                        </h2>
+
+                        <p class="section-description">
+                            کۆمەڵێک لە بەرهەمەکانمان لە یەک شوێن ببینە.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="products-grid" id="productsGrid">
+
+                    <!-- Product 1 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <!--
+                                Replace with your product image:
+
+                                <img
+                                    src="./images/product-1.jpg"
+                                    alt="ناوی بەرهەمی یەکەم"
+                                >
+                            -->
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی یەکەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٢٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Product 2 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی دووەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٣٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Product 3 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی سێیەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٤٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Product 4 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی چوارەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٥٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Product 5 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی پێنجەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٦٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- Product 6 -->
+                    <article class="product-card">
+
+                        <div class="product-image">
+
+                            <div class="product-image-placeholder">
+                                وێنەی بەرهەم
+                            </div>
+
+                        </div>
+
+                        <div class="product-content">
+
+                            <h3 class="product-name">
+                                بەرهەمی شەشەم
+                            </h3>
+
+                            <p class="product-description">
+                                وەسفی کورت و ڕوونی ئەم بەرهەمە لێرە بنووسە.
+                            </p>
+
+                            <div class="product-footer">
+
+                                <span class="product-price">
+                                    ٧٥,٠٠٠ د.ع
+                                </span>
+
+                                <button class="product-button">
+                                    وردەکاری
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             ABOUT / FEATURES
+        ======================================== -->
+
+        <section class="section" id="about">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div class="section-title-group">
+
+                        <span class="section-eyebrow">
+                            بۆچی ئێمە؟
+                        </span>
+
+                        <h2 class="section-title">
+                            سادە، پاک و متمانەپێکراو
+                        </h2>
+
+                        <p class="section-description">
+                            هەموو شتێک بە سادەترین شێوە بۆت ئامادە کراوە.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-grid">
+
+                    <article class="info-card">
+
+                        <div class="info-icon">
+                            ١
+                        </div>
+
+                        <h3>
+                            کوالێتی
+                        </h3>
+
+                        <p>
+                            گرنگی بە کوالێتی و وردەکاری دەدەین
+                            بۆ ئەوەی ئەزموونێکی باشترت هەبێت.
+                        </p>
+
+                    </article>
+
+
+                    <article class="info-card">
+
+                        <div class="info-icon">
+                            ٢
+                        </div>
+
+                        <h3>
+                            سادەیی
+                        </h3>
+
+                        <p>
+                            دیزاینێکی پاک و سادە کە ڕێگەت پێدەدات
+                            بە ئاسانی زانیارییەکان بخوێنیتەوە.
+                        </p>
+
+                    </article>
+
+
+                    <article class="info-card">
+
+                        <div class="info-icon">
+                            ٣
+                        </div>
+
+                        <h3>
+                            پشتگیری
+                        </h3>
+
+                        <p>
+                            بۆ هەر پرسیارێک دەتوانیت پەیوەندیمان
+                            پێوە بکەیت.
+                        </p>
+
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             CONTACT
+        ======================================== -->
+
+        <section class="section products-section" id="contact">
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div class="section-title-group">
+
+                        <span class="section-eyebrow">
+                            پەیوەندی
+                        </span>
+
+                        <h2 class="section-title">
+                            پێمان بڵێ چۆن یارمەتیت بدەین
+                        </h2>
+
+                        <p class="section-description">
+                            بۆ زانیاری زیاتر یان پرسیارێک،
+                            لە ڕێگەی کەناڵەکانی پەیوەندییەوە پەیوەندیمان پێوە بکە.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
+         FOOTER
+    ======================================== -->
+
+    <footer class="footer">
+
+        <div class="container footer-inner">
+
+            <div class="footer-main">
+
+                <div class="footer-brand">
+
+                    <div class="footer-logo">
+                        <span class="logo-mark">N</span>
+                        <span>ناوی براند</span>
+                    </div>
+
+                    <p class="footer-description">
+                        بەخێربێیت بۆ ماڵپەڕەکەمان.
+                        ئامانجمان پیشاندانی بەرهەمەکانمان
+                        بە شێوازێکی سادە و مۆدێرنە.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        بەستەرەکان
+                    </h4>
+
+                    <div class="footer-links">
+                        <a href="#home">سەرەتا</a>
+                        <a href="#products">بەرهەمەکان</a>
+                        <a href="#about">دەربارە</a>
+                        <a href="#contact">پەیوەندی</a>
+                    </div>
+
+                </div>
+
+
+                <div class="footer-column">
+
+                    <h4>
+                        پەیوەندی
+                    </h4>
+
+                    <div class="footer-links">
+                        <a href="tel:+9640000000000">
+                            +964 000 000 0000
+                        </a>
+
+                        <a href="mailto:info@example.com">
+                            info@example.com
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+                © ٢٠٢٦ هەموو مافەکان پارێزراون.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ======================================== -->
+
+    <script>
+        const mobileMenuButton =
+            document.getElementById("mobileMenuButton");
+
+        const navigation =
+            document.getElementById("navigation");
+
+
+        mobileMenuButton.addEventListener("click", () => {
+
+            const isOpen =
+                navigation.classList.toggle("mobile-open");
+
+            mobileMenuButton.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
+
+        });
+
+
+        // Close mobile navigation after clicking a link.
+        navigation.querySelectorAll("a").forEach((link) => {
+
+            link.addEventListener("click", () => {
+
+                navigation.classList.remove("mobile-open");
+
+                mobileMenuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            });
+
+        });
+    </script>
+
+</body>
+</html>
